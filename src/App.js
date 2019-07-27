@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import Form from './containers/Form'
+import Todos from './components/Todos'
+import AppContext from './contexts/AppContext'
+import reducers from './reducers'
 
-function App() {
+const App = () => {
+  const initialState = {
+    todos: []
+  }
+  const [state, dispatch] = useReducer(reducers, initialState)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{state, dispatch}}>
+      <div className="container-fluid">
+        <Form />
+        <Todos />
+      </div>
+    </AppContext.Provider>
   );
 }
 
