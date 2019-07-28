@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AppContext from '../contexts/AppContext'
+import Todo from '../containers/Todo'
 
 const Todos = () => {
+    const { state } = useContext(AppContext)
+
     return (
         <React.Fragment>
         <h4>Todo一覧</h4>
@@ -14,6 +18,7 @@ const Todos = () => {
                     </tr>
                 </thead>
                 <tbody>
+                    {state.todos.map((todo, index) => (<Todo key={index} todo={todo}/>))}
                 </tbody>
             </table>
         </React.Fragment>
